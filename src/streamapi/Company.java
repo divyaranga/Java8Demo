@@ -6,6 +6,10 @@ import java.util.List;
 public class Company {
 	private List<Department> departments = new ArrayList<>();
 
+	public Company(List<Department> departments) {
+		this.departments = departments;
+	}
+
 	public void add(Department department) {
 		departments.add(department);
 

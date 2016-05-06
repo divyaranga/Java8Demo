@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.plaf.OptionPaneUI;
-
 public class Company {
 	private List<Department> departments = new ArrayList<>();
 

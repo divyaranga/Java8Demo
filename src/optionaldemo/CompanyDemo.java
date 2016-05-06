@@ -2,8 +2,6 @@ package optionaldemo;
 
 import java.util.Optional;
 
-import javax.management.RuntimeErrorException;
-
 public class CompanyDemo {
 	public static void main(String[] args) {
 
@@ -20,16 +18,20 @@ public class CompanyDemo {
 		company.add(department3);
 
 		for (Department department : company.getDepartments()) {
+
 			if (department.getManager().isPresent()) {
 				System.out.println("Manager " + department.getManager().get());
 			}
-			Optional<Manager> startsWithJ = department.getManager().filter(x->x.getName().startsWith("J"));
 
-			//System.out.println(startsWithJ.orElse(new Manager("No manager")).getName());
 
 			System.out.println("Department Name " + department.getDepartmentName());
-			System.out.println("Manager " + department.getManager().orElse(new Manager("John")));
-			department.getManager().orElseThrow(()->new IllegalStateException("Manager cannot be null"));
+
+			//System.out.println("Manager " + department.getManager().orElse(new Manager("John")));
+
+			//Optional<Manager> startsWithJ = department.getManager().filter(x->x.getName().startsWith("J"));
+			//System.out.println(startsWithJ.orElse(new Manager("No manager")).getName());
+
+			//department.getManager().orElseThrow(()->new IllegalStateException("Manager cannot be null"));
 		}
 	}
 }
