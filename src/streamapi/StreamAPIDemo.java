@@ -1,12 +1,18 @@
 package streamapi;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamAPIDemo {
 
@@ -21,6 +27,8 @@ public class StreamAPIDemo {
 	public static void main(String[] args) {
 
 		initialize();
+
+		demonstrateStreamDeclaration();
 
 		countElementsInList();
 
@@ -39,6 +47,33 @@ public class StreamAPIDemo {
 		hasLargeDepartments();
 
 		collectorsDemo();
+
+	}
+
+	private static void demonstrateStreamDeclaration() {
+
+		// Create Streams from Values
+		Stream<String> stream = Stream.of("Streams");
+		stream.forEach(System.out::println);
+		stream = Stream.of("Create", "Streams", "from", "Values");
+		stream.forEach(System.out::println);
+
+		// Create streams from Functions
+		Stream<Long> tenNaturalNumbers = Stream.iterate(1L, n -> n + 1).limit(10);
+
+		tenNaturalNumbers.forEach(System.out::println);
+
+		// Streams from Regex
+		String str = "XML,CSS,HTML";
+		Pattern.compile(",").splitAsStream(str).forEach(System.out::println);
+
+		// Streams from files
+		Path path = Paths.get("/Users/dranga/java8/Java8Demo/src/functionalinterfaces/Button.java");
+		try (Stream<String> lines = Files.lines(path)) {
+			lines.forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
